@@ -1,14 +1,13 @@
-const Nav = () => {
+const Header = () => {
     return (
-        <div className="flex justify-between">
-            <div className="text-4xl font-extrabold">
+        <header className="flex justify-between">
+            <div className="text-4xl font-extrabold drop-shadow-lg">
                 <span className="text-red-400">W</span>
                 <span className="text-orange-300">W</span>
                 <span className="text-green-500">W</span>
             </div>
-            <nav>Navigation bar</nav>
-        </div>
+        </header>
     )
 }
 
-export default Nav
+export default Header
