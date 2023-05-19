@@ -11,11 +11,14 @@ const Nav = () => {
                     <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['🏠'] before:mr-2">
                         <Link to="/">Home</Link>
                     </li>
+                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['👤'] before:mr-2">
+                        Profile
+                    </li>
                     <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['📊'] before:mr-2">
                         <Link to="/dashboard">Dashboard</Link>
                     </li>
-                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['👤'] before:mr-2">
-                        Profile
+                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['🗓'] before:mr-2">
+                        <Link to="/my-day">My day</Link>
                     </li>
                     <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['☀️'] before:mr-2">
                         Heatmap

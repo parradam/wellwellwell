@@ -7,4 +7,9 @@ const getWellnessData = async () => {
     return response.data
 }
 
-export { getWellnessData }
+const addWellnessData = async (data) => {
+    const response = await axios.post(baseUrl, data)
+    return response.data
+}
+
+export { getWellnessData, addWellnessData }
