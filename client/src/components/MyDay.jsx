@@ -25,7 +25,6 @@ const MyDay = () => {
         <ContentWrapper>
             <div>
                 <h1 className="text-3xl font-bold">My day</h1>
-                {/* <p>How was your day? Let us know!</p> */}
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-2 w-min p-2 border border-blue-200 rounded-md bg-blue-50">
