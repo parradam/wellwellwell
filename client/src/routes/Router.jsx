@@ -1,6 +1,6 @@
 import { useRoutes } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
-import MyDay from '../components/MyDay'
+import MyDay from '../pages/MyDay'
 
 const Router = () => {
     const routes = useRoutes([
