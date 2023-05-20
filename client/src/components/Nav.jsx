@@ -8,18 +8,26 @@ const Nav = () => {
                     Navigation
                 </div>
                 <ul className="flex flex-col gap-1 px-1 py-2">
-                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['🏠'] before:mr-2">
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['👤'] before:mr-2">
-                        Profile
-                    </li>
-                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['📊'] before:mr-2">
-                        <Link to="/dashboard">Dashboard</Link>
-                    </li>
-                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['🗓'] before:mr-2">
-                        <Link to="/my-day">My day</Link>
-                    </li>
+                    <Link to="/">
+                        <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['🏠'] before:mr-2">
+                            Home
+                        </li>
+                    </Link>
+                    <Link to="/profile">
+                        <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['👤'] before:mr-2">
+                            Profile
+                        </li>
+                    </Link>
+                    <Link to="/dashboard">
+                        <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['📊'] before:mr-2">
+                            Dashboard
+                        </li>
+                    </Link>
+                    <Link to="/my-day">
+                        <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['🗓'] before:mr-2">
+                            My day
+                        </li>
+                    </Link>
                     <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['☀️'] before:mr-2">
                         Heatmap
                     </li>

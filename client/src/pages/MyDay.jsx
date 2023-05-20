@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ContentWrapper from './ContentWrapper'
+import ContentWrapper from '../components/ContentWrapper'
 import { addWellnessData } from '../api/wellness'
 
 const MyDay = () => {
