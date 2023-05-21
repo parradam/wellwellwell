@@ -32,18 +32,23 @@ const MyDay = () => {
 
     const isTagValid = (tag) => {
         const cleansedTag = tag.trim().toLowerCase()
-        const lowercaseTags = tags.map((tag) => tag.toLowerCase())
-        return lowercaseTags.includes(cleansedTag)
+        const lowercaseTags = tags.map((t) => t.toLowerCase())
+
+        return !lowercaseTags.includes(cleansedTag)
     }
 
     const handleTagAdd = (event) => {
-        const separators = [',', ' ', 'Tab']
+        const separators = [',', ' ', 'Tab', 'Enter']
         const trimmedTag = currentTag.trim()
 
+        // If there is no tag in the input field, allow default behaviour on form
+        if (event.key === 'Enter' && !trimmedTag.length) return
+
+        // Otherwise, prevent Enter key from submitting
         if (
             separators.includes(event.key) &&
             trimmedTag.length &&
-            !isTagValid(currentTag)
+            isTagValid(currentTag)
         ) {
             event.preventDefault()
             setTags((prevState) => [...prevState, trimmedTag])
@@ -105,12 +110,18 @@ const MyDay = () => {
                                     key={tag}
                                     className="text-sm p-2 rounded-lg border border-blue-200 bg-white"
                                 >
-                                    <span className="text-blue-500">
+                                    <span
+                                        className={`font-semibold ${
+                                            tag !== currentTag
+                                                ? 'text-blue-500'
+                                                : 'text-red-500'
+                                        }`}
+                                    >
                                         {tag}{' '}
                                     </span>
                                     <span
                                         onClick={() => handleTagDelete(tag)}
-                                        className="cursor-pointer p-1 hover:text-red-500"
+                                        className="cursor-pointer p-1 text-black hover:text-red-500"
                                     >
                                         ⌫
                                     </span>
@@ -133,7 +144,7 @@ const MyDay = () => {
                     <div>
                         <button
                             type="submit"
-                            disabled={formSubmitted}
+                            disabled={formSubmitted || !isTagValid(currentTag)}
                             className="rounded-lg w-28 px-4 py-2 bg-blue-500 disabled:bg-slate-400 text-sm text-white"
                         >
                             {formSubmitted ? 'Thanks! 🙏' : 'Submit'}
