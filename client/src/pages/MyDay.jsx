@@ -4,7 +4,8 @@ import { addWellnessData } from '../api/wellness'
 
 const MyDay = () => {
     const scores = [1, 2, 3, 4, 5]
-    const tagLimit = 5
+    const tagLimit = 4
+    const tagLength = 15
 
     const [selectedScore, setSelectedScore] = useState(3)
     const [formSubmitted, setFormSubmitted] = useState(false)
@@ -71,9 +72,9 @@ const MyDay = () => {
                     <div>
                         <h2 className="text-sm font-semibold">How was it?</h2>
                         <div className="flex md:grid-flow-col space-x-2 p-2">
-                            <div className="flex justify-center items-center w-10 h-10 p-1">
+                            {/* <div className="flex justify-center items-center w-10 h-10 p-1">
                                 👎
-                            </div>
+                            </div> */}
                             {scores.map((score) => (
                                 <div key={score}>
                                     <input
@@ -97,9 +98,9 @@ const MyDay = () => {
                                     </label>
                                 </div>
                             ))}
-                            <div className="flex justify-center items-center w-10 h-10 p-1">
+                            {/* <div className="flex justify-center items-center w-10 h-10 p-1">
                                 👍
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div>
@@ -133,8 +134,8 @@ const MyDay = () => {
                                 placeholder={`Add a tag... (${tags.length}/${tagLimit})`}
                                 disabled={tags.length >= tagLimit}
                                 value={currentTag}
-                                maxLength={20}
-                                size={22}
+                                maxLength={tagLength}
+                                size={tagLength + 2}
                                 className="text-sm p-2 rounded-lg border border-blue-200"
                                 onChange={handleTagChange}
                                 onKeyDown={handleTagAdd}

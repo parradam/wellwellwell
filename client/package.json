@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "host": "vite --host --port 5200",
-    "json": "json-server --port=8000 --watch db.json",
+    "json": "json-server --host 192.168.1.103 --port=8000 --watch db.json",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
