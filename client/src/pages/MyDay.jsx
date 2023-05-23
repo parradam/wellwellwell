@@ -72,9 +72,6 @@ const MyDay = () => {
                     <div>
                         <h2 className="text-sm font-semibold">How was it?</h2>
                         <div className="flex md:grid-flow-col space-x-2 p-2">
-                            {/* <div className="flex justify-center items-center w-10 h-10 p-1">
-                                👎
-                            </div> */}
                             {scores.map((score) => (
                                 <div key={score}>
                                     <input
@@ -98,9 +95,6 @@ const MyDay = () => {
                                     </label>
                                 </div>
                             ))}
-                            {/* <div className="flex justify-center items-center w-10 h-10 p-1">
-                                👍
-                            </div> */}
                         </div>
                     </div>
                     <div>
