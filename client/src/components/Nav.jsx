@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Nav = () => {
     return (
-        <div className="min-w-fit">
+        <div id="nav-container" className="min-w-fit">
             <div className="bg-blue-600 text-white rounded-lg p-2 flex flex-col divide-y divide-solid divide-blue-300 divide-opacity-50 drop-shadow-md">
                 <div className="border border-opacity-0 hover:border-opacity-0 border-blue-300 pl-3 pr-10 py-2 font-bold text-lg before:content-['🧭'] before:mr-2">
                     Navigation

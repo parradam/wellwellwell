@@ -10,7 +10,7 @@ const App = () => {
                     <Header />
                     <div className="container mx-auto pt-10">
                         <div className="flex flex-col w-10/12 bg-slate-50 mx-auto rounded-lg overflow-hidden shadow-lg">
-                            <div className="flex p-1">
+                            <div className="md:flex p-1">
                                 <Nav />
                                 <Router />
                             </div>

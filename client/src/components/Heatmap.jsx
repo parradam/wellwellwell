@@ -31,7 +31,7 @@ const Heatmap = () => {
             >
                 <div
                     id="heatmap-week"
-                    className="flex flex-wrap text-sm gap-2 md:gap-4"
+                    className="grid grid-cols-2 grid-flow-row text-sm gap-4"
                 >
                     {wellnessData &&
                         wellnessData
@@ -42,12 +42,25 @@ const Heatmap = () => {
                                 return (
                                     <div
                                         key={d.date.toString()}
-                                        className={`rounded-md w-12 h-12 md:w-20 md:h-20 hover:scale-125 transition-all delay-0 duration-200 hover:-z-0 flex flex-col justify-center items-center text-md font-semibold border-solid border-t-8 shadow-md cursor-pointer bg-white
+                                        className={`rounded-md min-h-30 min-w-30 hover:scale-125 transition-all delay-0 duration-200 hover:-z-0 flex flex-col justify-start items-center text-md font-semibold border-solid border-t-8 shadow-md cursor-pointer bg-white
                                 ${heatmapConfig.colors[d.score]}
                                 `}
                                     >
                                         <span>{format(parsedDate, 'ccc')}</span>
                                         <span>{format(parsedDate, 'd')}</span>
+                                        <div className="flex flex-wrap gap-2 p-2">
+                                            {d.tags &&
+                                                d.tags.map((tag) => (
+                                                    <div
+                                                        key={tag}
+                                                        className="text-sm p-1 bg-white"
+                                                    >
+                                                        <span className="font-semibold text-blue-500">
+                                                            {tag}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
                                 )
                             })}
