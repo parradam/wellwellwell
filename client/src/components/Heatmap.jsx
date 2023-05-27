@@ -1,23 +1,17 @@
-import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import { getWellnessData } from '../api/wellness'
 import heatmapConfig from '../config/heatmapConfig'
+import { useWellnessData } from '../hooks/useWellnessData'
 
 const Heatmap = () => {
-    const [wellnessData, setWellnessData] = useState([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await getWellnessData()
-            setWellnessData(response)
-        }
-
-        fetchData()
-    }, [])
+    const { isLoading, isError, data } = useWellnessData()
 
     const sortByDate = (a, b) => {
         return new Date(a.date).getTime() - new Date(b.date).getTime()
     }
+
+    if (isLoading) return 'Loading...'
+
+    if (isError) return 'An error occurred. Please try again.'
 
     return (
         <div className="w-full flex flex-col gap-2">
@@ -33,8 +27,8 @@ const Heatmap = () => {
                     id="heatmap-week"
                     className="grid grid-cols-2 grid-flow-row text-sm gap-4"
                 >
-                    {wellnessData &&
-                        wellnessData
+                    {data &&
+                        data
                             .sort(sortByDate)
                             .slice(-7)
                             .map((d) => {
