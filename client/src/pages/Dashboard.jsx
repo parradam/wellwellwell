@@ -1,8 +1,24 @@
 import { Link } from 'react-router-dom'
 import ContentWrapper from '../components/ContentWrapper'
+import TaskList from '../components/TaskList'
 import Heatmap from '../components/Heatmap'
 
 const Dashboard = () => {
+    const tasks = [
+        {
+            title: 'Record how you feel',
+            status: 'done',
+            path: '/my-day',
+            emoji: '🎗',
+        },
+        {
+            title: 'An incomplete task',
+            status: 'ongoing',
+            path: '/my-day',
+            emoji: '🤯',
+        },
+    ]
+
     return (
         <ContentWrapper>
             <div>
@@ -14,13 +30,8 @@ const Dashboard = () => {
                     </span>
                     . Here is your dashboard for today.
                 </p>
-                <h2 className="text-2xl font-semibold">To do</h2>
-                <ul>
-                    <li className="font-semibold text-blue-700">
-                        <Link to="/my-day">Record how you feel</Link>
-                    </li>
-                </ul>
             </div>
+            <TaskList tasks={tasks} />
             <Heatmap />
         </ContentWrapper>
     )
