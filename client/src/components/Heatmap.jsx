@@ -1,9 +1,9 @@
 import { format } from 'date-fns'
 import heatmapConfig from '../config/heatmapConfig'
-import { useWellnessData } from '../hooks/useWellnessData'
+import { useWellnessQuery } from '../hooks/useWellnessData'
 
 const Heatmap = () => {
-    const { isLoading, isError, data } = useWellnessData()
+    const { isLoading, isError, data } = useWellnessQuery()
 
     const sortByDate = (a, b) => {
         return new Date(a.date).getTime() - new Date(b.date).getTime()

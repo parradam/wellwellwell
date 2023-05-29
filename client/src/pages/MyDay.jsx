@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ContentWrapper from '../components/ContentWrapper'
-import { addWellnessData } from '../api/wellness'
+import { useAddWellnessMutation } from '../hooks/useWellnessData'
 
 const MyDay = () => {
     const scores = [1, 2, 3, 4, 5]
@@ -12,6 +12,8 @@ const MyDay = () => {
     const [currentTag, setCurrentTag] = useState('')
     const [tags, setTags] = useState([])
 
+    const addWellnessMutation = useAddWellnessMutation()
+
     const handleSubmit = async (event) => {
         event.preventDefault()
         const data = {
@@ -20,7 +22,7 @@ const MyDay = () => {
             tags,
         }
         try {
-            await addWellnessData(data)
+            addWellnessMutation.mutate(data)
             setFormSubmitted(true)
         } catch (error) {
             console.error(error)
