@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import ContentWrapper from '../components/ContentWrapper'
+import TaskList from '../components/TaskList'
 import Heatmap from '../components/Heatmap'
 
 const Dashboard = () => {
@@ -14,13 +15,8 @@ const Dashboard = () => {
                     </span>
                     . Here is your dashboard for today.
                 </p>
-                <h2 className="text-2xl font-semibold">To do</h2>
-                <ul>
-                    <li className="font-semibold text-blue-700">
-                        <Link to="/my-day">Record how you feel</Link>
-                    </li>
-                </ul>
             </div>
+            <TaskList />
             <Heatmap />
         </ContentWrapper>
     )
