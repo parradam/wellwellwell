@@ -1,6 +1,41 @@
+import { parseISO, isSameDay } from 'date-fns'
+import { sortByDate } from '../utils/arrayUtils'
+import { useWellnessQuery } from '../hooks/useWellnessData'
 import TaskListItem from './TaskListItem'
 
-const TaskList = ({ tasks }) => {
+const TaskList = () => {
+    const { isLoading, isError, data } = useWellnessQuery()
+
+    if (isLoading) return 'Loading...'
+
+    if (isError) return 'An error occurred. Please try again.'
+
+    const latestWellnessData = data.sort(sortByDate).slice(-1)[0]
+
+    const myDayCompleted = isSameDay(
+        parseISO(latestWellnessData.date),
+        new Date()
+    )
+
+    console.log(myDayCompleted)
+
+    const tasks = [
+        {
+            title: 'Record how you feel',
+            complete: myDayCompleted,
+            path: '/my-day',
+            emoji: '🎗',
+        },
+        {
+            title: 'An incomplete task',
+            complete: false,
+            path: '/my-day',
+            emoji: '🤯',
+        },
+    ]
+
+    console.log(tasks)
+
     return (
         <div>
             <h2 className="text-2xl font-semibold">To do</h2>

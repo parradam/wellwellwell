@@ -4,21 +4,6 @@ import TaskList from '../components/TaskList'
 import Heatmap from '../components/Heatmap'
 
 const Dashboard = () => {
-    const tasks = [
-        {
-            title: 'Record how you feel',
-            status: 'done',
-            path: '/my-day',
-            emoji: '🎗',
-        },
-        {
-            title: 'An incomplete task',
-            status: 'ongoing',
-            path: '/my-day',
-            emoji: '🤯',
-        },
-    ]
-
     return (
         <ContentWrapper>
             <div>
@@ -31,7 +16,7 @@ const Dashboard = () => {
                     . Here is your dashboard for today.
                 </p>
             </div>
-            <TaskList tasks={tasks} />
+            <TaskList />
             <Heatmap />
         </ContentWrapper>
     )

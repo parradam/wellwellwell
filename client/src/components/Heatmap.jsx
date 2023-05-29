@@ -1,13 +1,10 @@
 import { format } from 'date-fns'
 import heatmapConfig from '../config/heatmapConfig'
 import { useWellnessQuery } from '../hooks/useWellnessData'
+import { sortByDate } from '../utils/arrayUtils'
 
 const Heatmap = () => {
     const { isLoading, isError, data } = useWellnessQuery()
-
-    const sortByDate = (a, b) => {
-        return new Date(a.date).getTime() - new Date(b.date).getTime()
-    }
 
     if (isLoading) return 'Loading...'
 
