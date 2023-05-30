@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import ContentWrapper from '../components/ContentWrapper'
 import { useAddWellnessMutation } from '../hooks/useWellnessData'
+import heatmapConfig from '../config/heatmapConfig'
 
 const MyDay = () => {
-    const scores = [1, 2, 3, 4, 5]
-    const tagLimit = 4
+    const { scores } = heatmapConfig
+    const tagLimit = 6
     const tagLength = 15
 
     const [selectedScore, setSelectedScore] = useState(3)
@@ -74,15 +75,15 @@ const MyDay = () => {
                     <div>
                         <h2 className="text-sm font-semibold">How was it?</h2>
                         <div className="flex md:grid-flow-col space-x-2 p-2">
-                            {scores.map((score) => (
-                                <div key={score}>
+                            {scores.map(({ rating, emoji }) => (
+                                <div key={rating}>
                                     <input
                                         type="radio"
-                                        id={score}
+                                        id={rating}
                                         name="score"
-                                        value={score}
+                                        value={rating}
                                         className="peer hidden"
-                                        checked={selectedScore === score}
+                                        checked={selectedScore === rating}
                                         onChange={(event) =>
                                             setSelectedScore(
                                                 Number(event.target.value)
@@ -90,10 +91,10 @@ const MyDay = () => {
                                         }
                                     />
                                     <label
-                                        htmlFor={score}
+                                        htmlFor={rating}
                                         className="block cursor-pointer select-none w-10 h-10 rounded-lg p-2 text-center border border-blue-200 peer-checked:border-opacity-0 bg-white hover:bg-blue-100 peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
                                     >
-                                        {score}
+                                        {emoji}
                                     </label>
                                 </div>
                             ))}

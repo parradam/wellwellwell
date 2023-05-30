@@ -7,4 +7,11 @@ export default {
         4: 'border-green-400',
         5: 'border-green-500',
     },
+    scores: [
+        { rating: 1, emoji: '😩' },
+        { rating: 2, emoji: '😕' },
+        { rating: 3, emoji: '🙂' },
+        { rating: 4, emoji: '😃' },
+        { rating: 5, emoji: '🤩' },
+    ],
 }
