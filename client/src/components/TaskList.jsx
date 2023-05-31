@@ -17,8 +17,6 @@ const TaskList = () => {
         new Date()
     )
 
-    console.log(myDayCompleted)
-
     const tasks = [
         {
             title: 'Record how you feel',
@@ -33,8 +31,6 @@ const TaskList = () => {
             emoji: '🤯',
         },
     ]
-
-    console.log(tasks)
 
     return (
         <div>
