@@ -9,7 +9,7 @@ const Nav = () => {
     }
 
     return (
-        <div id="nav-container" className="min-w-fit">
+        <nav id="nav-container" className="min-w-fit">
             <div className="bg-blue-600 text-white rounded-lg px-2 md:py-2 flex flex-col divide-y divide-solid divide-blue-300 divide-opacity-50 drop-shadow-md">
                 <div>
                     <div className="hidden md:block border border-opacity-0 hover:border-opacity-0 border-blue-300 pl-3 pr-10 py-2 font-bold text-lg before:content-['🧭'] before:mr-2">
@@ -71,7 +71,7 @@ const Nav = () => {
                     </li>
                 </ul>
             </div>
-        </div>
+        </nav>
     )
 }
 
