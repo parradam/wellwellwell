@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import ContentWrapper from '../components/ContentWrapper'
 import TaskList from '../components/TaskList'
-import Heatmap from '../components/Heatmap'
+import Heatmap from '../components/Heatmap/Heatmap'
 
 const Dashboard = () => {
     return (
