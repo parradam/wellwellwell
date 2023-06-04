@@ -14,7 +14,7 @@ const Heatmap = () => {
                 <h2 className="text-2xl font-semibold">Your last week</h2>
                 <p>This is how your last seven days are looking!</p>
             </div>
-            <div className="p-4 border rounded-md bg-blue-50">
+            <div className="p-4 border border-blue-200 rounded-md">
                 {data && <HeatmapGrid data={data} />}
             </div>
         </div>
