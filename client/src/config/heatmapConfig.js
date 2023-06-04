@@ -8,6 +8,7 @@ export default {
         5: 'border-green-500',
     },
     scores: [
+        { rating: 0, emoji: '🤔' },
         { rating: 1, emoji: '😩' },
         { rating: 2, emoji: '😕' },
         { rating: 3, emoji: '🙂' },
