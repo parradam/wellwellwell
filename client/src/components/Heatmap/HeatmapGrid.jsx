@@ -9,7 +9,7 @@ const HeatmapGrid = () => {
 
     const { isLoading, isError, data } = useWellnessQuery()
 
-    if (isLoading) return 'Loading your heatmap...'
+    if (isLoading) return <div>Loading your heatmap...</div>
 
     if (isError)
         return (
