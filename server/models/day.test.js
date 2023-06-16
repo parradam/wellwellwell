@@ -25,4 +25,8 @@ describe('Day model', () => {
     const validationError = d.validateSync();
     expect(validationError).toBeUndefined();
   });
+
+  it('test', () => {
+    expect(1).toBeLessThanOrEqual(0);
+  });
 });
