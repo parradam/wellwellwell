@@ -36,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm test"
+      "pre-commit": "GIT_DIR='../.git'lint-staged && GIT_DIR='../.git' npm test"
     }
   },
   "lint-staged": {
