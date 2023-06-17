@@ -26,7 +26,7 @@ describe('Day model', () => {
     expect(validationError).toBeUndefined();
   });
 
-  it('test', () => {
+  it('test that will fail', () => {
     expect(1).toBeLessThanOrEqual(0);
   });
 });
