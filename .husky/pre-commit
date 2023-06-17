@@ -1,4 +1,6 @@
 #!/bin/sh
+. "$(dirname "$0")/../.husky/_/husky.sh"
+
 
 echo "running pre-commit hook"
 cd server
