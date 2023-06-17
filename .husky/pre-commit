@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd server
+npm run lint
+npm test
