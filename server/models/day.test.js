@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import Day from './day.js';
+import Day from './day';
 
 describe('Day model', () => {
   it('should be invalid if date is empty', () => {
@@ -24,9 +24,5 @@ describe('Day model', () => {
     });
     const validationError = d.validateSync();
     expect(validationError).toBeUndefined();
-  });
-
-  it('test that will fail', () => {
-    expect(1).toBeLessThanOrEqual(0);
   });
 });

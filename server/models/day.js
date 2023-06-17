@@ -6,6 +6,6 @@ const daySchema = new mongoose.Schema({
   tags: [String],
 });
 
-const dayModel = mongoose.model('Day', daySchema);
+const Day = mongoose.model('Day', daySchema);
 
-export default dayModel;
+export default Day;
