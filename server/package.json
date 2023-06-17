@@ -11,8 +11,7 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:w": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
-    "prepare": "cd .. && husky install server/.husky"
+    "test:w": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "author": "",
   "license": "ISC",
@@ -37,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "cd ../.husky && npx lint-staged && npx npm test"
+      "pre-commit": "cd server && npx lint-staged && npx npm test"
     }
   },
   "lint-staged": {
