@@ -1,6 +1,6 @@
 const controller = {
   get: () => {
-    console.log('get');
+    console.log('get data');
   },
 };
 

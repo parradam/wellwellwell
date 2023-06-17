@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "running pre-commit hook"
 cd server
 npm run lint
 npm test
+echo "finished pre-commit hook"
