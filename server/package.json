@@ -36,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "cd server && npx lint-staged && npx npm test"
+      "pre-commit": "cd server && npx lint-staged && npm test"
     }
   },
   "lint-staged": {
