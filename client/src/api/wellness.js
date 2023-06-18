@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = `${import.meta.env.VITE_WELLNESS_URL}/wellness`
+const baseUrl = `${import.meta.env.VITE_WELLNESS_URL}/api/days`
 
 const getWellnessData = async () => {
     const response = await axios.get(baseUrl)

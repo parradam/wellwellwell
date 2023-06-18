@@ -1,8 +1,15 @@
 import express from 'express';
-import wellnessRouter from './routes/wellnessRouter.js';
+import cors from 'cors';
+import './utils/db.js';
+import dayRouter from './routes/dayRouter.js';
 
 const app = express();
 
-app.use('/wellness', wellnessRouter);
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// API routes
+app.use('/api/days', dayRouter);
 
 export default app;

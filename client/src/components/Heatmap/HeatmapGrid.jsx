@@ -36,7 +36,7 @@ const HeatmapGrid = () => {
                             date={date}
                             color={color}
                             emoji={emoji}
-                            key={cardData.id}
+                            key={cardData._id}
                         />
                     )
                 })}

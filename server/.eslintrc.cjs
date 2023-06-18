@@ -8,5 +8,14 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2021,
   },
-  rules: {},
+  rules: {
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        js: 'always',
+        json: 'always',
+      },
+    ],
+  },
 };
