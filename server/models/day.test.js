@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import Day from './day';
+import Day from './day.js';
 
 describe('Day model', () => {
   it('should be invalid if date is empty', () => {

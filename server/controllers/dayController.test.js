@@ -1,6 +1,6 @@
 import { jest, describe, it, expect } from '@jest/globals';
-import dayController from './dayController';
-import Day from '../models/day';
+import { createDay } from './dayController.js';
+import Day from '../models/day.js';
 
 jest.mock('../models/day.js');
 
@@ -27,7 +27,7 @@ describe('addDay', () => {
     const saveMock = jest.fn().mockResolvedValue(mockedDay);
     jest.spyOn(Day.prototype, 'save').mockImplementation(saveMock);
 
-    await dayController.createDay(req, res);
+    await createDay(req, res);
 
     expect(Day.prototype.save).toHaveBeenCalledTimes(1);
     expect(res.status).toHaveBeenCalledWith(201);
