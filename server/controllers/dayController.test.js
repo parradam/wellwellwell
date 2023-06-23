@@ -33,5 +33,41 @@ describe('addDay', () => {
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledTimes(1);
     expect(res.json).toHaveBeenCalledWith(req.body);
+
+    Day.prototype.save.mockRestore();
+  });
+
+  // should be tested via supertest on the app itself? that way, expresss-async-errors will be used, app.use(errorHandler) will allow the responses to be returned and checked
+  it('should handle an empty request', async () => {
+    const req = { body: undefined };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await createDay(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ error: 'missing request body' });
+  });
+
+  it('should handle a request with a missing parameter', async () => {
+    const req = {
+      body: {
+        date: '2023-06-04T20:49:58.178Z',
+        tags: ['bored', 'tired'],
+      },
+    };
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await createDay(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      error: 'missing request field(s)',
+    });
   });
 });

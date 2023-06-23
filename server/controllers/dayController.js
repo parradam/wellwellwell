@@ -1,16 +1,21 @@
 import Day from '../models/day.js';
 
 const createDay = async (req, res) => {
-  try {
-    const { date, score, tags } = req.body;
-    const parsedDate = new Date(date);
-    const day = new Day({ date: parsedDate, score, tags });
-    const savedDay = await day.save();
-
-    res.status(201).json(savedDay);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+  if (!req.body) {
+    return res.status(400).json({ error: 'missing request body' });
   }
+
+  const { date, score, tags } = req.body;
+
+  if (!date || !score || !tags) {
+    return res.status(400).json({ error: 'missing request field(s)' });
+  }
+
+  const parsedDate = new Date(date);
+  const day = new Day({ date: parsedDate, score, tags });
+  const savedDay = await day.save();
+
+  return res.status(201).json(savedDay);
 };
 
 const getDays = async (req, res) => {
