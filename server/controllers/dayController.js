@@ -2,13 +2,13 @@ import Day from '../models/day.js';
 
 const createDay = async (req, res) => {
   if (!req.body) {
-    return res.status(400).json({ error: 'missing request body' });
+    return res.status(400).json({ error: 'Missing request body' });
   }
 
   const { date, score, tags } = req.body;
 
   if (!date || !score || !tags) {
-    return res.status(400).json({ error: 'missing request field(s)' });
+    return res.status(400).json({ error: 'Missing request field(s)' });
   }
 
   const parsedDate = new Date(date);

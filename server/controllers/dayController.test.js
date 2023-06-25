@@ -47,7 +47,7 @@ describe('addDay', () => {
     await createDay(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: 'missing request body' });
+    expect(res.json).toHaveBeenCalledWith({ error: 'Missing request body' });
   });
 
   it('should handle a request with a missing parameter', async () => {
@@ -66,7 +66,7 @@ describe('addDay', () => {
 
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      error: 'missing request field(s)',
+      error: 'Missing request field(s)',
     });
   });
 });

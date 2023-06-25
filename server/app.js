@@ -1,7 +1,8 @@
 import express from 'express';
+import 'express-async-errors';
 import cors from 'cors';
-// import './utils/db.js';
 import dayRouter from './routes/dayRouter.js';
+import errorHandler from './utils/errorHandler.js';
 
 const app = express();
 
@@ -11,5 +12,7 @@ app.use(express.json());
 
 // API routes
 app.use('/api/days', dayRouter);
+
+app.use(errorHandler);
 
 export default app;
