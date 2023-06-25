@@ -17,7 +17,7 @@ const TaskList = () => {
 
     const latestWellnessData = data.sort(sortByDate).slice(-1)[0]
     const myDayCompleted = isSameDay(
-        parseISO(latestWellnessData.date),
+        parseISO(latestWellnessData?.date),
         new Date()
     )
 
