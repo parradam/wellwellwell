@@ -1,10 +1,22 @@
+/* eslint-disable no-console */
+
 import http from 'http';
 import app from './app.js';
 import { PORT } from './utils/config.js';
+import { openConnection, closeConnection } from './utils/db.js';
 
-const server = http.createServer(app);
+const startServer = async () => {
+  try {
+    await openConnection();
+    const server = http.createServer(app);
+    server.listen(PORT, () => {
+      console.log(`server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('error starting the server:', error.message);
+    closeConnection();
+    process.exit(1);
+  }
+};
 
-server.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Server running on port ${PORT}`);
-});
+startServer();

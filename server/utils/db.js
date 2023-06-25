@@ -1,14 +1,25 @@
 /* eslint-disable no-console */
 import mongoose from 'mongoose';
-import { MONGODB_URL } from './config.js';
+import { NODE_ENV, MONGODB_URL } from './config.js';
 
-console.log(`connecting to ${MONGODB_URL}...`);
+let dbConnection;
 
-mongoose
-  .connect(MONGODB_URL)
-  .then(() => {
-    console.log('connected to MongoDB');
-  })
-  .catch((error) => {
-    console.error('error connecting to MongoDB', error.message);
-  });
+export const openConnection = async () => {
+  if (NODE_ENV === 'development')
+    console.log(`connecting to ${MONGODB_URL}...`);
+
+  try {
+    dbConnection = await mongoose.connect(MONGODB_URL);
+    if (NODE_ENV === 'development') console.log('connected to MongoDB');
+  } catch (error) {
+    if (NODE_ENV === 'development')
+      console.error('error connecting to MongoDB', error.message);
+  }
+};
+
+export const closeConnection = async () => {
+  if (dbConnection) {
+    await dbConnection.disconnect();
+    if (NODE_ENV === 'development') console.error('disconnected from MongoDB');
+  }
+};

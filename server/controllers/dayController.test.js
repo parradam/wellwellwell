@@ -37,7 +37,6 @@ describe('addDay', () => {
     Day.prototype.save.mockRestore();
   });
 
-  // should be tested via supertest on the app itself? that way, expresss-async-errors will be used, app.use(errorHandler) will allow the responses to be returned and checked
   it('should handle an empty request', async () => {
     const req = { body: undefined };
     const res = {

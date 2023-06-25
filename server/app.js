@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import './utils/db.js';
+// import './utils/db.js';
 import dayRouter from './routes/dayRouter.js';
 
 const app = express();
