@@ -1,4 +1,12 @@
-import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
+import {
+  beforeAll,
+  beforeEach,
+  afterEach,
+  afterAll,
+  describe,
+  expect,
+  it,
+} from '@jest/globals';
 import supertest from 'supertest';
 import { openConnection, closeConnection } from './utils/db.js';
 import Day from './models/day.js';
@@ -7,9 +15,19 @@ import testData from './test-data.js';
 
 const api = supertest(app);
 
-// TODO test error handler implicitly by simulating ValidationError, TypeError, CastError, etc.
 beforeAll(async () => {
+  // DB logic is separated from app.js, so the connection must first be opened
   await openConnection();
+});
+
+beforeEach(async () => {
+  // Reset the application state before tests
+  await Day.deleteMany({});
+  await Day.insertMany(testData.day);
+});
+
+afterEach(async () => {
+  // Reset the application state so development can continue
   await Day.deleteMany({});
   await Day.insertMany(testData.day);
 });
@@ -19,7 +37,7 @@ afterAll(async () => {
 });
 
 describe('app', () => {
-  describe('day route', () => {
+  describe('days route', () => {
     it('should handle a valid POST', async () => {
       const day = {
         date: '2023-06-04T20:49:58.178Z',
@@ -75,6 +93,15 @@ describe('app', () => {
         .expect('Content-Type', /application\/json/);
 
       expect(response.body).toHaveProperty('error', 'Missing request field(s)');
+    });
+
+    it('should handle a valid GET', async () => {
+      const response = await api
+        .get('/api/days')
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+      expect(response.body).toHaveLength(testData.day.length);
     });
   });
 });
