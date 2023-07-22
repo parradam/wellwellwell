@@ -9,6 +9,16 @@ export const createUser = async (req, res) => {
   const { password, username, email } = req.body;
   const { salt, hash } = await generateSaltAndHash(password);
 
+  // Prevent duplicate usernames
+  const existingUsername = await User.findOne({ username });
+  if (existingUsername)
+    return res.status(409).json({ error: 'Username already exists' });
+
+  // Prevent duplicate email addresses
+  const existingEmail = await User.findOne({ email });
+  if (existingEmail)
+    return res.status(409).json({ error: 'Email address already exists' });
+
   const user = new User({
     username,
     email,
@@ -17,7 +27,7 @@ export const createUser = async (req, res) => {
   });
 
   await user.save();
-  return res.status(201).json(user);
+  return res.status(201).json({ username });
 };
 
 export const logInUser = async (req, res) => {
