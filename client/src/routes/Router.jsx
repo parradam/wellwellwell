@@ -5,8 +5,7 @@ import ErrorPage from '../pages/ErrorPage'
 
 const Router = () => {
     const routes = useRoutes([
-        { path: '/', element: <div>Home</div> },
-        { path: '/dashboard', element: <Dashboard /> },
+        { path: '/', element: <Dashboard /> },
         { path: '/my-day', element: <MyDay /> },
         { path: '/*', element: <ErrorPage /> },
     ])

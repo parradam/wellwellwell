@@ -8,7 +8,7 @@ const ErrorPage = () => {
             <div className="text-9xl">😣</div>
             <p>Sorry about that.</p>
             <p>
-                <Link to="/dashboard">Return to the Dashboard</Link>
+                <Link to="/">Return to the Dashboard</Link>
             </p>
         </ContentWrapper>
     )
