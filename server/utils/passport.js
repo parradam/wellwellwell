@@ -1,9 +1,13 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import fs from 'fs';
-import path from 'path';
 import User from '../models/user.js';
 
-const pathToKey = path.join(__dirname, '..', 'public.pem');
+const filename = fileURLToPath(import.meta.url);
+const dir = dirname(filename);
+
+const pathToKey = join(dir, '..', 'public.pem');
 const PUB_KEY = fs.readFileSync(pathToKey, 'utf-8');
 
 // At a minimum, you must pass the `jwtFromRequest` and `secretOrKey` properties
@@ -18,17 +22,20 @@ const options = {
 export default (passport) => {
   // JWT payload passed to verify callback
   passport.use(
-    new JwtStrategy(options, (jwtPayload, done) => {
+    new JwtStrategy(options, async (jwtPayload, done) => {
       // JWT is valid
 
-      // assign 'sub' property on JWT to database ID of user
-      User.findOne({ _id: jwtPayload.sub }, (err, user) => {
-        if (err) return done(err, false);
+      try {
+        // assign 'sub' property on JWT to database ID of user
+        const user = await User.findOne({ _id: jwtPayload.sub });
+
+        if (!user) return done(null, false);
 
         // If user is valid, return it
-        if (user) return done(null, user);
-        return done(null, false);
-      });
+        return done(null, user);
+      } catch (error) {
+        return done(error, false);
+      }
     }),
   );
 };

@@ -42,7 +42,7 @@ export const issueJwt = (user) => {
   });
 
   return {
-    token: `Bearer: ${signedToken}`,
+    token: `Bearer ${signedToken}`,
     expires: expiresIn,
   };
 };
