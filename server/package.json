@@ -13,8 +13,8 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:w": "NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "pre-commit": "lint-staged",
-    "start-mongodb": "./data/mongod --dbpath ./data/db",
-    "kill-mongodb": "killall mongod",
+    "sm": "./data/mongod --dbpath ./data/db",
+    "km": "killall mongod",
     "create-database": "node ./utils/create-dev-db.js"
   },
   "author": "",
