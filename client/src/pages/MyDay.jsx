@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import ContentWrapper from '../components/ContentWrapper'
 import { useAddWellnessMutation } from '../hooks/useWellnessData'
 import heatmapConfig from '../config/heatmapConfig'
 
@@ -66,7 +65,7 @@ const MyDay = () => {
     }
 
     return (
-        <ContentWrapper>
+        <>
             <div>
                 <h1 className="text-3xl font-bold">My day</h1>
             </div>
@@ -152,7 +151,7 @@ const MyDay = () => {
                     </div>
                 </div>
             </form>
-        </ContentWrapper>
+        </>
     )
 }
 
