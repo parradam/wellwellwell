@@ -1,5 +1,5 @@
 // This is the generic Auth page that will show the Login component, with a button to switch to the Register component
-const Auth = () => {
+const AuthWrapper = ({ children }) => {
     return (
         <>
             <div className="py-10 lg:py-40 bg-gradient-to-tl from-white to-blue-400 min-h-screen">
@@ -9,7 +9,7 @@ const Auth = () => {
                             <div>
                                 <h2 className="text-4xl mb-4">
                                     <div className="text-4xl font-extrabold drop-shadow-lg">
-                                        <span className="font-extrabold text-transparent text-blue-600">
+                                        <span className="font-extrabold text-blue-600">
                                             well
                                         </span>
                                         <span className="font-extrabold text-white italic">
@@ -24,33 +24,37 @@ const Auth = () => {
                                     <p className="text-2xl">
                                         Look after yourself.
                                     </p>
-                                    <ul className="flex flex-col gap-2 font-bold text-green-500">
-                                        <li className="before:content-['📋'] before:mr-2">
-                                            <span>Create a profile</span>
+                                    <ul className="flex flex-col gap-2 font-bold">
+                                        <li className="before:content-['📋'] before:mr-2 ">
+                                            <span>
+                                                Create a{' '}
+                                                <span className="bg-purple-600 italic">
+                                                    profile
+                                                </span>
+                                            </span>
                                         </li>
                                         <li className="before:content-['⌨️'] before:mr-2">
-                                            <span>Record how you feel</span>
+                                            <span>
+                                                Record how you{' '}
+                                                <span className="bg-pink-600 italic">
+                                                    feel
+                                                </span>
+                                            </span>
                                         </li>
                                         <li className="before:content-['📊'] before:mr-2">
-                                            <span>Gain insights</span>
+                                            <span>
+                                                Gain{' '}
+                                                <span className="bg-green-600 italic">
+                                                    insights
+                                                </span>
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div className="w-full lg:w-1/2 py-12 lg:py-12 px-8 lg:px-12 flex flex-col gap-6 text-slate-800">
-                            <div>
-                                <h2 className="text-3xl font-bold mb-4">
-                                    Register
-                                </h2>
-                                <p className="text-2xl">
-                                    Create your free account.
-                                </p>
-                            </div>
-                            {/* <RegisterForm
-                                registerUser={registerUser}
-                                navigate={navigate}
-                            /> */}
+                        <div className="w-full lg:w-1/2 py-12 lg:py-12 px-8 lg:px-12">
+                            {children}
                         </div>
                     </div>
                 </div>
@@ -59,4 +63,4 @@ const Auth = () => {
     )
 }
 
-export default Auth
+export default AuthWrapper
