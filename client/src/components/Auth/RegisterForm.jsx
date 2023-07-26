@@ -1,13 +1,21 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const RegisterForm = ({ registerUser }) => {
     const navigate = useNavigate()
 
     const schema = z
         .object({
+            username: z
+                .string('Username is required')
+                .min(6, 'Username is too short')
+                .max(20, 'Username is too long')
+                .refine(
+                    (value) => /^[a-zA-Z0-9-_!?]+$/.test(value),
+                    'Username contains invalid characters'
+                ),
             email: z.string().email('Email address is invalid'),
             password: z
                 .string()
@@ -29,10 +37,10 @@ const RegisterForm = ({ registerUser }) => {
     const { isSubmitting, errors } = formState
 
     const handleSave = async (formData) => {
-        const { email, password } = formData
+        const { username, email, password } = formData
 
         try {
-            await registerUser(email, password)
+            await registerUser({ username, email, password })
             navigate('/login')
         } catch (error) {
             switch (error.code) {
@@ -63,6 +71,25 @@ const RegisterForm = ({ registerUser }) => {
             className="flex flex-col gap-5"
         >
             <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="username" className="font-semibold">
+                        Username
+                    </label>
+                    <span className="text-sm text-gray-500">
+                        6-20 chars, allowed characters: A-Z, 0-9, ?!_-
+                    </span>
+                    <span className="text-sm text-red-600">
+                        {errors.username?.message}
+                    </span>
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        placeholder="johnnybravo"
+                        {...register('username')}
+                        className="border border-gray-400 py-1 px-2 rounded-lg"
+                    />
+                </div>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="email" className="font-semibold">
                         Email
@@ -134,8 +161,11 @@ const RegisterForm = ({ registerUser }) => {
                     onClick={handleRedirect}
                     className="py-2 rounded-lg bg-violet-500 font-bold text-white hover:bg-violet-700"
                 >
-                    Log in
+                    I already have an account
                 </button>
+                <span className="text-center text-sm">
+                    <Link to="/reset">Forgot your password?</Link>
+                </span>
             </div>
         </form>
     )

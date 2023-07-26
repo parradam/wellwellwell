@@ -1,8 +1,7 @@
 import RegisterForm from './RegisterForm'
+import { registerUser } from '../../api/auth'
 
 const Register = () => {
-    const registerUser = () => console.log(registerUser)
-
     return (
         <div className="text-slate-800 flex flex-col gap-6">
             <div>
