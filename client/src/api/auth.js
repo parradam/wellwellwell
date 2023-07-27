@@ -15,4 +15,16 @@ const registerUser = async ({ username, email, password }) => {
     }
 }
 
-export { registerUser }
+const logInUser = async ({ username, password }) => {
+    try {
+        const response = await axios.post(`${baseUrl}/login`, {
+            username,
+            password,
+        })
+        return response.data
+    } catch (error) {
+        return error
+    }
+}
+
+export { registerUser, logInUser }

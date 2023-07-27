@@ -1,36 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const RegisterForm = ({ registerUser }) => {
+const LoginForm = ({ logInUser }) => {
     const navigate = useNavigate()
 
-    const schema = z
-        .object({
-            username: z
-                .string('Username is required')
-                .min(1, 'Username is required')
-                .min(6, 'Username is too short')
-                .max(20, 'Username is too long')
-                .refine(
-                    (value) => /^[a-zA-Z0-9-_!?]+$/.test(value),
-                    'Username contains invalid characters'
-                ),
-            email: z.string().email('Email address is invalid'),
-            password: z
-                .string()
-                .min(1, 'Password is required')
-                .min(6, 'Password must be at least 6 characters'),
-            confirmPassword: z
-                .string()
-                .min(1, 'Password is required')
-                .min(6, 'Password must be at least 6 characters'),
-        })
-        .refine((data) => data.password === data.confirmPassword, {
-            message: 'Passwords do not match',
-            path: ['confirmPassword'],
-        })
+    const schema = z.object({
+        username: z
+            .string()
+            .min(1, 'Username is required')
+            .min(6, 'Username is too short')
+            .max(20, 'Username is too long'),
+        password: z.string().min(1, 'Password is required'),
+    })
 
     const { register, handleSubmit, formState, setError } = useForm({
         mode: 'onTouched',
@@ -40,11 +23,13 @@ const RegisterForm = ({ registerUser }) => {
     const { isSubmitting, errors } = formState
 
     const handleSave = async (formData) => {
-        const { username, email, password } = formData
+        const { username, password } = formData
 
         try {
-            await registerUser({ username, email, password })
-            handleRedirectToLogin()
+            const response = await logInUser({ username, password })
+            if (response.success) {
+                navigate('/')
+            }
         } catch (error) {
             switch (error.code) {
                 case 'auth/email-already-in-use':
@@ -63,9 +48,9 @@ const RegisterForm = ({ registerUser }) => {
         }
     }
 
-    const handleRedirectToLogin = (event) => {
+    const handleRedirectToRegister = (event) => {
         event.preventDefault()
-        navigate('/login')
+        navigate('/signup')
     }
 
     return (
@@ -78,9 +63,6 @@ const RegisterForm = ({ registerUser }) => {
                     <label htmlFor="username" className="font-semibold">
                         Username
                     </label>
-                    <span className="text-sm text-gray-500">
-                        6-20 chars, allowed characters: A-Z, 0-9, ?!_-
-                    </span>
                     <span className="text-sm text-red-600">
                         {errors.username?.message}
                     </span>
@@ -94,28 +76,9 @@ const RegisterForm = ({ registerUser }) => {
                     />
                 </div>
                 <div className="flex flex-col gap-1">
-                    <label htmlFor="email" className="font-semibold">
-                        Email
-                    </label>
-                    <span className="text-sm text-red-600">
-                        {errors.email?.message}
-                    </span>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="johnnybravo@warner.com"
-                        {...register('email')}
-                        className="border border-gray-400 py-1 px-2 rounded-lg"
-                    />
-                </div>
-                <div className="flex flex-col gap-1">
                     <label htmlFor="Password" className="font-semibold">
                         Password
                     </label>
-                    <span className="text-sm text-gray-500">
-                        6 chars, at least 1 uppercase letter and number
-                    </span>
                     {errors.password?.message && (
                         <span className="text-sm text-red-600">
                             {errors.password?.message}
@@ -127,22 +90,6 @@ const RegisterForm = ({ registerUser }) => {
                         type="password"
                         placeholder="myP4ssword!"
                         {...register('password')}
-                        className="border border-gray-400 py-1 px-2 rounded-lg"
-                    />
-                </div>
-                <div className="flex flex-col gap-1">
-                    <label htmlFor="confirmPassword" className="font-semibold">
-                        Confirm password
-                    </label>
-                    <span className="text-sm text-red-600">
-                        {errors.confirmPassword?.message}
-                    </span>
-                    <input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type="password"
-                        placeholder="myP4ssword!"
-                        {...register('confirmPassword')}
                         className="border border-gray-400 py-1 px-2 rounded-lg"
                     />
                 </div>
@@ -158,17 +105,20 @@ const RegisterForm = ({ registerUser }) => {
                     disabled={isSubmitting}
                     className="py-2 rounded-lg bg-blue-500 font-bold text-white hover:bg-blue-700"
                 >
-                    Sign up
+                    Log in
                 </button>
                 <button
-                    onClick={handleRedirectToLogin}
+                    onClick={handleRedirectToRegister}
                     className="py-2 rounded-lg bg-violet-500 font-bold text-white hover:bg-violet-700"
                 >
-                    I already have an account
+                    I&apos;m new here
                 </button>
+                <span className="text-center text-sm">
+                    <Link to="/reset">Forgot your password?</Link>
+                </span>
             </div>
         </form>
     )
 }
 
-export default RegisterForm
+export default LoginForm
