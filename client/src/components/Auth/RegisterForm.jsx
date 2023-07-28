@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { getErrorType } from '../../utils/errorUtils'
 
 const RegisterForm = ({ registerUser }) => {
     const navigate = useNavigate()
@@ -9,7 +10,7 @@ const RegisterForm = ({ registerUser }) => {
     const schema = z
         .object({
             username: z
-                .string('Username is required')
+                .string()
                 .min(1, 'Username is required')
                 .min(6, 'Username is too short')
                 .max(20, 'Username is too long')
@@ -21,11 +22,11 @@ const RegisterForm = ({ registerUser }) => {
             password: z
                 .string()
                 .min(1, 'Password is required')
-                .min(6, 'Password must be at least 6 characters'),
+                .min(6, 'Password is too short'),
             confirmPassword: z
                 .string()
                 .min(1, 'Password is required')
-                .min(6, 'Password must be at least 6 characters'),
+                .min(6, 'Password is too short'),
         })
         .refine((data) => data.password === data.confirmPassword, {
             message: 'Passwords do not match',
@@ -46,20 +47,8 @@ const RegisterForm = ({ registerUser }) => {
             await registerUser({ username, email, password })
             handleRedirectToLogin()
         } catch (error) {
-            switch (error.code) {
-                case 'auth/email-already-in-use':
-                    setError('email', {
-                        type: 'manual',
-                        message: 'Email address is already in use',
-                    })
-                    break
-                default:
-                    setError('', {
-                        type: 'manual',
-                        message: 'An error occurred. Please try again.',
-                    })
-                    break
-            }
+            const { formField, message } = getErrorType(error)
+            setError(formField, { type: 'manual', message: message })
         }
     }
 

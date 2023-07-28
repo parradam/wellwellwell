@@ -4,6 +4,7 @@ import {
   isValidPassword,
   issueJwt,
 } from '../utils/auth.js';
+import { authErrors } from '../utils/customErrors.js';
 
 export const createUser = async (req, res) => {
   const { password, username, email } = req.body;
@@ -12,12 +13,11 @@ export const createUser = async (req, res) => {
   // Prevent duplicate usernames
   const existingUsername = await User.findOne({ username });
   if (existingUsername)
-    return res.status(409).json({ error: 'Username already exists' });
+    return res.status(409).json(authErrors.usernameAlreadyExists);
 
   // Prevent duplicate email addresses
   const existingEmail = await User.findOne({ email });
-  if (existingEmail)
-    return res.status(409).json({ error: 'Email address already exists' });
+  if (existingEmail) return res.status(409).json(authErrors.emailAlreadyExists);
 
   const user = new User({
     username,
@@ -35,7 +35,7 @@ export const logInUser = async (req, res) => {
 
   const user = await User.findOne({ username });
 
-  if (!user) return res.status(401).json({ error: 'User not found' });
+  if (!user) return res.status(401).json(authErrors.usernameDoesNotExist);
 
   const isValid = await isValidPassword(password, user.salt, user.hash);
 
