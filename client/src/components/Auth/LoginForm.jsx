@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
+import { getErrorType } from '../../utils/errorUtils'
 
 const LoginForm = ({ logInUser }) => {
     const navigate = useNavigate()
@@ -31,20 +32,8 @@ const LoginForm = ({ logInUser }) => {
                 navigate('/')
             }
         } catch (error) {
-            switch (error.code) {
-                case 'auth/email-already-in-use':
-                    setError('email', {
-                        type: 'manual',
-                        message: 'Email address is already in use',
-                    })
-                    break
-                default:
-                    setError('', {
-                        type: 'manual',
-                        message: 'An error occurred. Please try again.',
-                    })
-                    break
-            }
+            const { formField, message } = getErrorType(error)
+            setError(formField, { type: 'manual', message: message })
         }
     }
 

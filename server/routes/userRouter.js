@@ -12,7 +12,7 @@ router.get(
   '/protected',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    res.status(200).json({ success: true, message: 'Authenticated ' });
+    res.status(200).json({ success: true, message: 'Authenticated' });
   },
 );
 

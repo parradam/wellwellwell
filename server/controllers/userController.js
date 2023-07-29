@@ -49,5 +49,5 @@ export const logInUser = async (req, res) => {
     });
   }
 
-  return res.status(401).json({ success: false, error: 'Password incorrect' });
+  return res.status(401).json(authErrors.passwordIncorrect);
 };
