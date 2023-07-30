@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { saveToSessionStorage } from './storage'
 
 const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/users`
 
@@ -16,6 +17,9 @@ const logInUser = async ({ username, password }) => {
         username,
         password,
     })
+    if (response.data.token) {
+        saveToSessionStorage('authToken', response.data.token)
+    }
     return response.data
 }
 
