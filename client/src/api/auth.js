@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { saveToSessionStorage } from './storage'
+import { loadFromSessionStorage, saveToSessionStorage } from './storage'
 
 const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/users`
 
@@ -23,4 +23,13 @@ const logInUser = async ({ username, password }) => {
     return response.data
 }
 
-export { registerUser, logInUser }
+const isValidUser = async () => {
+    const response = await axios.get(`${baseUrl}/protected`, {
+        headers: {
+            Authorization: loadFromSessionStorage('authToken'),
+        },
+    })
+    return response
+}
+
+export { registerUser, logInUser, isValidUser }
