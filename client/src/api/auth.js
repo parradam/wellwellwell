@@ -1,5 +1,9 @@
 import axios from 'axios'
-import { loadFromSessionStorage, saveToSessionStorage } from './storage'
+import {
+    saveToSessionStorage,
+    loadFromSessionStorage,
+    removeFromSessionStorage,
+} from './storage'
 
 const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/users`
 
@@ -23,13 +27,23 @@ const logInUser = async ({ username, password }) => {
     return response.data
 }
 
+const logOutUser = () => {
+    removeFromSessionStorage('authToken')
+}
+
 const isValidUser = async () => {
+    const token = loadFromSessionStorage('authToken')
+
+    console.log(token)
+
+    if (token === null) throw Error('No authToken')
+
     const response = await axios.get(`${baseUrl}/protected`, {
         headers: {
-            Authorization: loadFromSessionStorage('authToken'),
+            Authorization: token,
         },
     })
     return response
 }
 
-export { registerUser, logInUser, isValidUser }
+export { registerUser, logInUser, logOutUser, isValidUser }
