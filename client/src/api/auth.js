@@ -34,8 +34,6 @@ const logOutUser = () => {
 const isValidUser = async () => {
     const token = loadFromSessionStorage('authToken')
 
-    console.log(token)
-
     if (token === null) throw Error('No authToken')
 
     const response = await axios.get(`${baseUrl}/protected`, {

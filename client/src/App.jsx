@@ -1,13 +1,12 @@
-// import { useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import Router from './routes/Router'
-// import { isValidUser } from './api/auth'
 import { useCheckAuth } from './hooks/useCheckAuth'
 
 const App = () => {
-    useCheckAuth()
+    const [isCheckAuthComplete, setIsCheckAuthComplete] = useState()
+    useCheckAuth({ setIsCheckAuthComplete })
 
-    return <Router />
+    if (isCheckAuthComplete) return <Router />
 }
 
 export default App
