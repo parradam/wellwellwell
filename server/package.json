@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "nodemon": "NODE_ENV=development nodemon index.js",
+    "ks": "lsof -i :8000 | grep LISTEN | awk '{print $2}' | xargs kill",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
