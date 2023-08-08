@@ -1,25 +1,12 @@
-import Header from './components/Header'
-import Nav from './components/Nav'
+import { useState } from 'react'
 import Router from './routes/Router'
+import { useCheckAuth } from './hooks/useCheckAuth'
 
 const App = () => {
-    return (
-        <>
-            <div className="min-h-screen bg-gradient-to-tr from-white to-blue-400">
-                <div>
-                    <Header />
-                    <div className="container mx-auto pt-10">
-                        <div className="flex flex-col w-10/12 bg-slate-50 mx-auto rounded-lg overflow-hidden shadow-lg">
-                            <div className="md:flex p-1">
-                                <Nav />
-                                <Router />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+    const [isCheckAuthComplete, setIsCheckAuthComplete] = useState()
+    useCheckAuth({ setIsCheckAuthComplete })
+
+    if (isCheckAuthComplete) return <Router />
 }
 
 export default App

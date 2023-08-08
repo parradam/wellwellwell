@@ -7,7 +7,7 @@ const createDay = async (req, res) => {
 
   const { date, score, tags } = req.body;
 
-  if (!date || !score || !tags) {
+  if (!date || score === undefined || tags === undefined) {
     return res.status(400).json({ error: 'Missing request field(s)' });
   }
 
