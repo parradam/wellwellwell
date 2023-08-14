@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Tasks from '../components/Tasks/Tasks'
+// import Tasks from '../components/Tasks/Tasks'
 import Heatmap from '../components/Heatmap/Heatmap'
 
 const Dashboard = () => {
@@ -15,7 +15,7 @@ const Dashboard = () => {
                     . Here is your dashboard for today.
                 </p>
             </div>
-            <Tasks />
+            {/* <Tasks /> */}
             <Heatmap />
         </>
     )

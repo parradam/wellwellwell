@@ -18,6 +18,21 @@ const createDay = async (req, res) => {
   return res.status(201).json(savedDay);
 };
 
+const removeDay = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Missing ID parameter' });
+  }
+
+  try {
+    await Day.deleteOne({ _id: id });
+    return res.status(200).json({ message: 'Deletion successful' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 const getDays = async (req, res) => {
   try {
     const days = await Day.find({});
@@ -27,4 +42,4 @@ const getDays = async (req, res) => {
   }
 };
 
-export { createDay, getDays };
+export { createDay, removeDay, getDays };

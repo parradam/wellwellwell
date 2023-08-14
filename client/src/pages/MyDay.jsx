@@ -65,10 +65,9 @@ const MyDay = () => {
     }
 
     return (
-        <>
-            <div>
-                <h1 className="text-3xl font-bold">My day</h1>
-            </div>
+        <div className="flex flex-col gap-4">
+            <h1 className="text-3xl font-bold">My day</h1>
+
             <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-2 w-min p-2 border border-blue-200 rounded-md bg-blue-50">
                     <div>
@@ -144,14 +143,14 @@ const MyDay = () => {
                         <button
                             type="submit"
                             disabled={formSubmitted || !isTagValid(currentTag)}
-                            className="rounded-lg w-28 px-4 py-2 bg-blue-500 disabled:bg-slate-400 text-sm text-white"
+                            className="rounded-lg w-28 px-4 py-2 disabled:bg-slate-400 text-sm bg-blue-500 font-bold text-white hover:bg-blue-600"
                         >
                             {formSubmitted ? 'Thanks! 🙏' : 'Submit'}
                         </button>
                     </div>
                 </div>
             </form>
-        </>
+        </div>
     )
 }
 
