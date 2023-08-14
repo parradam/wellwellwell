@@ -12,6 +12,15 @@ const getWellnessData = async () => {
     return response.data
 }
 
+const removeWellnessData = async ({ id }) => {
+    const response = await axios.delete(`${baseUrl}/${id}`, {
+        headers: {
+            Authorization: loadFromSessionStorage('authToken'),
+        },
+    })
+    return response.data
+}
+
 const addWellnessData = async (data) => {
     const response = await axios.post(baseUrl, data, {
         headers: {
@@ -21,4 +30,4 @@ const addWellnessData = async (data) => {
     return response.data
 }
 
-export { getWellnessData, addWellnessData }
+export { getWellnessData, removeWellnessData, addWellnessData }

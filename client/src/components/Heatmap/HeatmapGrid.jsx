@@ -3,8 +3,10 @@ import { useWellnessQuery } from '../../hooks/useWellnessData'
 import HeatmapCard from './HeatmapCard'
 import { sortByDate } from '../../utils/arrayUtils'
 import heatmapConfig from '../../config/heatmapConfig'
+import Modal from '../Modal/Modal'
+import MyDay from '../../pages/MyDay'
 
-const HeatmapGrid = () => {
+const HeatmapGrid = ({ editDayModalData, setEditDayModalData }) => {
     const { colors, scores } = heatmapConfig
 
     const { isLoading, isError, data } = useWellnessQuery()
@@ -19,28 +21,36 @@ const HeatmapGrid = () => {
         )
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">
-            {data
-                .sort(sortByDate)
-                .slice(-7)
-                .map((cardData) => {
-                    const parsedDate = new Date(cardData.date)
-                    const date = format(parsedDate, 'ccc, d MMM')
-                    const color = colors[cardData.score]
-                    const emoji = scores.find(
-                        (s) => s.rating === cardData.score
-                    ).emoji
-                    return (
-                        <HeatmapCard
-                            cardData={cardData}
-                            date={date}
-                            color={color}
-                            emoji={emoji}
-                            key={cardData._id}
-                        />
-                    )
-                })}
-        </div>
+        <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">
+                {data
+                    .sort(sortByDate)
+                    .slice(-7)
+                    .map((cardData) => {
+                        const parsedDate = new Date(cardData.date)
+                        const date = format(parsedDate, 'ccc, d MMM')
+                        const color = colors[cardData.score]
+                        const emoji = scores.find(
+                            (s) => s.rating === cardData.score
+                        ).emoji
+                        return (
+                            <HeatmapCard
+                                cardData={cardData}
+                                date={date}
+                                color={color}
+                                emoji={emoji}
+                                key={cardData._id}
+                            />
+                        )
+                    })}
+            </div>
+            <Modal
+                modalData={editDayModalData}
+                setModalData={setEditDayModalData}
+            >
+                <MyDay />
+            </Modal>
+        </>
     )
 }
 
