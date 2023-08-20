@@ -1,3 +1,5 @@
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import 'express-async-errors';
 import cors from 'cors';
@@ -13,6 +15,14 @@ const app = express();
 passportConfig(passport);
 
 // Middleware
+// To serve frontend
+const filename = fileURLToPath(import.meta.url);
+const dir = dirname(filename);
+
+const pathToPublic = join(dir, 'public');
+app.use(express.static(pathToPublic));
+
+// The rest
 app.use(passport.initialize());
 app.use(cors());
 app.use(express.json());
