@@ -1,21 +1,23 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { isValidUser } from '../api/auth'
+import { logOutUser } from '../api/auth'
 
-export const useCheckAuth = ({ setIsCheckAuthComplete }) => {
-    const navigate = useNavigate()
+export const useCheckAuth = async () => {
+    const [isUserValid, setIsValidUser] = useState(null)
 
     useEffect(() => {
         const checkValidUser = async () => {
             try {
                 const response = await isValidUser()
-                if (response) setIsCheckAuthComplete(true)
+                setIsValidUser(response)
             } catch (error) {
-                setIsCheckAuthComplete(true)
-                navigate('/login')
+                logOutUser()
             }
+            setIsValidUser(false)
         }
 
         checkValidUser()
-    }, [navigate, setIsCheckAuthComplete])
+    }, [])
+
+    return isUserValid
 }
