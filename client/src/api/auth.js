@@ -32,16 +32,19 @@ const logOutUser = () => {
 }
 
 const isValidUser = async () => {
-    const token = loadFromSessionStorage('authToken')
+    try {
+        const token = loadFromSessionStorage('authToken')
+        if (token === null) return false
 
-    if (token === null) throw Error('No authToken')
-
-    const response = await axios.get(`${baseUrl}/protected`, {
-        headers: {
-            Authorization: token,
-        },
-    })
-    return response
+        await axios.get(`${baseUrl}/protected`, {
+            headers: {
+                Authorization: token,
+            },
+        })
+        return true
+    } catch (error) {
+        return false
+    }
 }
 
 export { registerUser, logInUser, logOutUser, isValidUser }

@@ -5,8 +5,8 @@ export const getErrorType = (error) => {
                 customErrorType = 'auth/unknown',
                 formField = '',
                 message = 'An error occurred. Please try again',
-            },
-        },
+            } = {},
+        } = {},
     } = error ?? {}
 
     return { customErrorType, formField, message }
