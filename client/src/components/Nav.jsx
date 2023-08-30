@@ -37,9 +37,11 @@ const Nav = () => {
                             My day
                         </li>
                     </Link>
-                    <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['👤'] before:mr-2">
-                        Profile
-                    </li>
+                    <Link to="/profile">
+                        <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['👤'] before:mr-2">
+                            Profile
+                        </li>
+                    </Link>
                     <li className="select-none hover:bg-blue-500 border border-opacity-0 hover:border-opacity-50 border-blue-300 pl-3 pr-10 py-1 rounded-md cursor-pointer before:content-['☀️'] before:mr-2">
                         Heatmap
                     </li>
