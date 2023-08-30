@@ -1,0 +1,31 @@
+# syntax=docker/dockerfile:1
+
+FROM ubuntu:22.04
+
+# Set the DEBIAN_FRONTEND environment variable to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update
+RUN apt install -y gnupg curl
+
+# Add Node.js repository
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+
+RUN apt update
+
+# Install Node.js and npm from official package repositories
+RUN apt install -y nodejs
+
+ENV PORT=8000
+ENV IP=0.0.0.0
+ENV MONGODB_URL=mongodb://mongodb-wellwellwell:27017/wellwellwell
+
+WORKDIR /wellwellwell
+COPY . .
+
+RUN cd client && npm i && npm run build && npm run copy-build
+RUN cd server && npm i
+
+CMD cd server && npm start
+
+EXPOSE 8000

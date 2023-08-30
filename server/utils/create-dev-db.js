@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import mongoose from 'mongoose';
+import { MONGODB_URL } from './config.js';
 
 mongoose
-  .connect('mongodb://localhost:27017/wellwellwell', {
+  .connect(MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

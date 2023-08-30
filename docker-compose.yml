@@ -1,0 +1,26 @@
+services:
+  server:
+    build:
+      dockerfile: Dockerfile.server
+      context: .
+    ports:
+      - '8000:8000'
+    depends_on:
+      - mongodb
+    networks:
+      - mynetwork
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-wellwellwell
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./server/data/db:/data/db
+    networks:
+      - mynetwork
+
+volumes:
+  mongodb-data:
+
+networks:
+  mynetwork:
