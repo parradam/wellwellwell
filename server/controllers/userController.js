@@ -51,3 +51,13 @@ export const logInUser = async (req, res) => {
 
   return res.status(401).json(authErrors.passwordIncorrect);
 };
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const { user } = req;
+    const { username, email, createdAt } = user;
+    return res.json({ username, email, createdAt });
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};

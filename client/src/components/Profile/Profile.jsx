@@ -1,13 +1,20 @@
 import { formatDistance } from 'date-fns'
+import { useProfileQuery } from '../../hooks/useCheckAuth'
 
 const Profile = () => {
-    const user = {
-        username: 'adam12',
-        email: 'email@email.com',
-        date_joined: new Date(2023, 6, 1),
-    }
-    const { username, email, date_joined } = user
-    const parsedJoined = new Date(date_joined)
+    const { isLoading, isError, data } = useProfileQuery()
+
+    if (isLoading) return <div>Loading your profile...</div>
+
+    if (isError)
+        return (
+            <div>
+                There was an error loading your profile. Please try again soon!
+            </div>
+        )
+
+    const { username, email, createdAt } = data
+    const parsedJoined = new Date(createdAt)
     const formattedJoined = formatDistance(parsedJoined, new Date(), {
         addSuffix: true,
     })
