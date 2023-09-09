@@ -24,3 +24,5 @@ volumes:
 
 networks:
   mynetwork:
+    external: true
+    name: lwt_test

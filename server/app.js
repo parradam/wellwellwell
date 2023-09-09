@@ -18,7 +18,6 @@ passportConfig(passport);
 // To serve frontend
 const filename = fileURLToPath(import.meta.url);
 const dir = dirname(filename);
-
 const pathToPublic = join(dir, 'public');
 app.use(express.static(pathToPublic));
 
@@ -31,6 +30,11 @@ app.use(express.urlencoded({ extended: true }));
 // API routes
 app.use('/api/days', dayRouter);
 app.use('/api/users', userRouter);
+
+// Catch-all route for React frontend routes
+app.get('*', (req, res) => {
+  res.sendFile(join(pathToPublic, 'index.html'));
+});
 
 app.use(errorHandler);
 
