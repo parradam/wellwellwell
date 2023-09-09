@@ -47,4 +47,13 @@ const isValidUser = async () => {
     }
 }
 
-export { registerUser, logInUser, logOutUser, isValidUser }
+const getUserProfile = async () => {
+    const response = await axios.get(`${baseUrl}/profile`, {
+        headers: {
+            Authorization: loadFromSessionStorage('authToken'),
+        },
+    })
+    return response.data
+}
+
+export { registerUser, logInUser, logOutUser, isValidUser, getUserProfile }

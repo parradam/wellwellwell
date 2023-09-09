@@ -1,11 +1,12 @@
 import { useRoutes } from 'react-router-dom'
 import MainAppWrapper from '../components/MainAppWrapper'
 import Dashboard from '../pages/Dashboard'
-import MyDay from '../pages/MyDay'
-import ErrorPage from '../pages/ErrorPage'
 import AuthWrapper from '../components/Auth/AuthWrapper'
 import Register from '../components/Auth/Register'
 import Login from '../components/Auth/Login'
+import MyDay from '../pages/MyDay'
+import Profile from '../components/Profile/Profile'
+import ErrorPage from '../pages/ErrorPage'
 
 const Router = () => {
     const routes = useRoutes([
@@ -39,6 +40,16 @@ const Router = () => {
                 <>
                     <MainAppWrapper>
                         <MyDay />
+                    </MainAppWrapper>
+                </>
+            ),
+        },
+        {
+            path: '/profile',
+            element: (
+                <>
+                    <MainAppWrapper>
+                        <Profile />
                     </MainAppWrapper>
                 </>
             ),

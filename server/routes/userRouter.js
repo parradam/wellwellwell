@@ -1,6 +1,10 @@
 import express from 'express';
 import passport from 'passport';
-import { createUser, logInUser } from '../controllers/userController.js';
+import {
+  createUser,
+  getUserProfile,
+  logInUser,
+} from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -14,6 +18,12 @@ router.get(
   (req, res) => {
     res.status(200).json({ success: true, message: 'Authenticated' });
   },
+);
+
+router.get(
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
+  getUserProfile,
 );
 
 export default router;
