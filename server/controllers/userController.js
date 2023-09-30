@@ -40,7 +40,6 @@ export const logInUser = async (req, res) => {
   const isValid = await isValidPassword(password, user.salt, user.hash);
 
   if (isValid) {
-    console.log(issueJwt(user).token);
     // TODO change secure to environment variable (dev: false, prod: true)
     // TODO change sameSite to environment variable (dev: None, prod: Strict)
     res.cookie('auth', issueJwt(user), {

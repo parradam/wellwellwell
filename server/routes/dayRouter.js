@@ -4,7 +4,7 @@ import { createDay, removeDay, getDays } from '../controllers/dayController.js';
 
 const router = express.Router();
 
-router.post('/', createDay);
+router.post('/', passport.authenticate('jwt', { session: false }), createDay);
 
 router.delete(
   '/:id',
