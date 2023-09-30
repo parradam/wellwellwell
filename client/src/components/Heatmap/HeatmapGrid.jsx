@@ -20,29 +20,37 @@ const HeatmapGrid = ({ editDayModalData, setEditDayModalData }) => {
             </div>
         )
 
+    // if (data.length == 0) {
+    //     return <div>Record your day by clicking 'Rate my day'!</div>
+    // }
+
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row gap-4">
-                {data
-                    .sort(sortByDate)
-                    .slice(-7)
-                    .map((cardData) => {
-                        const parsedDate = new Date(cardData.date)
-                        const date = format(parsedDate, 'ccc, d MMM')
-                        const color = colors[cardData.score]
-                        const emoji = scores.find(
-                            (s) => s.rating === cardData.score
-                        ).emoji
-                        return (
-                            <HeatmapCard
-                                cardData={cardData}
-                                date={date}
-                                color={color}
-                                emoji={emoji}
-                                key={cardData._id}
-                            />
-                        )
-                    })}
+                {data.length ? (
+                    data
+                        .sort(sortByDate)
+                        .slice(-7)
+                        .map((cardData) => {
+                            const parsedDate = new Date(cardData.date)
+                            const date = format(parsedDate, 'ccc, d MMM')
+                            const color = colors[cardData.score]
+                            const emoji = scores.find(
+                                (s) => s.rating === cardData.score
+                            ).emoji
+                            return (
+                                <HeatmapCard
+                                    cardData={cardData}
+                                    date={date}
+                                    color={color}
+                                    emoji={emoji}
+                                    key={cardData._id}
+                                />
+                            )
+                        })
+                ) : (
+                    <>Nothing here!</>
+                )}
             </div>
             <Modal
                 modalData={editDayModalData}
