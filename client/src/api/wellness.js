@@ -4,11 +4,7 @@ import { loadFromSessionStorage } from './storage'
 const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/days`
 
 const getWellnessData = async () => {
-    const response = await axios.get(baseUrl, {
-        headers: {
-            Authorization: loadFromSessionStorage('authToken'),
-        },
-    })
+    const response = await axios.get(baseUrl, { withCredentials: true })
     return response.data
 }
 

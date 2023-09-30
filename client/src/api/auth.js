@@ -1,9 +1,5 @@
 import axios from 'axios'
-import {
-    saveToSessionStorage,
-    loadFromSessionStorage,
-    removeFromSessionStorage,
-} from './storage'
+import { saveToSessionStorage } from './storage'
 
 const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/users`
 
@@ -17,29 +13,24 @@ const registerUser = async ({ username, email, password }) => {
 }
 
 const logInUser = async ({ username, password }) => {
-    const response = await axios.post(`${baseUrl}/login`, {
-        username,
-        password,
-    })
+    const response = await axios.post(
+        `${baseUrl}/login`,
+        {
+            username,
+            password,
+        },
+        { withCredentials: true }
+    )
     if (response.data.token) {
         saveToSessionStorage('authToken', response.data.token)
     }
     return response.data
 }
 
-const logOutUser = () => {
-    removeFromSessionStorage('authToken')
-}
-
 const isValidUser = async () => {
     try {
-        const token = loadFromSessionStorage('authToken')
-        if (token === null) return false
-
         await axios.get(`${baseUrl}/protected`, {
-            headers: {
-                Authorization: token,
-            },
+            withCredentials: true,
         })
         return true
     } catch (error) {
@@ -49,11 +40,9 @@ const isValidUser = async () => {
 
 const getUserProfile = async () => {
     const response = await axios.get(`${baseUrl}/profile`, {
-        headers: {
-            Authorization: loadFromSessionStorage('authToken'),
-        },
+        withCredentials: true,
     })
     return response.data
 }
 
-export { registerUser, logInUser, logOutUser, isValidUser, getUserProfile }
+export { registerUser, logInUser, isValidUser, getUserProfile }

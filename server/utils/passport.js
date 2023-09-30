@@ -1,4 +1,4 @@
-import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
+import { Strategy as JwtStrategy } from 'passport-jwt';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs';
@@ -12,7 +12,14 @@ const PUB_KEY = fs.readFileSync(pathToKey, 'utf-8');
 
 // At a minimum, you must pass the `jwtFromRequest` and `secretOrKey` properties
 const options = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: (req) => {
+    const authCookie = req.cookies.auth?.token;
+    if (authCookie && authCookie.startsWith('Bearer ')) {
+      const jwtWithoutBearer = authCookie.slice('Bearer '.length);
+      return jwtWithoutBearer;
+    }
+    return null;
+  },
   secretOrKey: PUB_KEY,
   algorithms: ['RS256'],
 };

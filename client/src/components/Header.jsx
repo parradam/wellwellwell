@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { logOutUser } from '../api/auth'
+import { logOutUser } from '../api/cookies'
 
 const Header = () => {
     const navigate = useNavigate()
