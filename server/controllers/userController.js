@@ -40,12 +40,17 @@ export const logInUser = async (req, res) => {
   const isValid = await isValidPassword(password, user.salt, user.hash);
 
   if (isValid) {
-    const tokenObject = issueJwt(user);
+    // TODO change secure to environment variable (dev: false, prod: true)
+    // TODO change sameSite to environment variable (dev: None, prod: Strict)
+    res.cookie('auth', issueJwt(user), {
+      // maxAge: 1000 * 60 * 60 * 24,
+      // httpOnly: true,
+      // secure: true,
+      // sameSite: 'Strict',
+    });
 
     return res.status(200).json({
       success: true,
-      token: tokenObject.token,
-      expiresIn: tokenObject.expires,
     });
   }
 

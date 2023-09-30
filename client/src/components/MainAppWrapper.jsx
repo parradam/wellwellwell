@@ -1,7 +1,18 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from './Header'
 import Nav from './Nav'
+import { isUserLoggedIn } from '../api/cookies'
 
 const MainAppWrapper = ({ children }) => {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!isUserLoggedIn()) {
+            navigate('/login')
+        }
+    }, [navigate])
+
     return (
         <div className="min-h-screen bg-gradient-to-tr from-white to-blue-400">
             <div>
